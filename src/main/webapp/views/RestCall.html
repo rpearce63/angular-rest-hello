@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<script>
+	var app = angular.module("myApp", []);
+	app.controller("Hello",
+	function ($scope, $http){
+		$scope.getGreeting = function(name) {
+			$http.get('http://localhost:8080/greeting/' + name).
+			success(function(data) {
+				$scope.greeting = data;
+			});
+		};
+	});
+	
+</script>
+
+<body>
+	<div ng-app="myApp" ng-controller="Hello" 
+	class="w3-panel w3-light-grey w3-border w3-padding-medium w3-margin"
+	style="width:300px">
+		<label>Name: </label><input class="w3-input" ng-model="name" /> 
+		<p><button ng-click="getGreeting(name)">Submit</button></p>
+		<p>The ID is {{greeting.id}}</p>
+		<p>The content is {{greeting.content}}</p>
+	</div>
+
+
+</body>
+</html>
